@@ -1,6 +1,6 @@
 import http from 'http';
 import * as dotenv from 'dotenv';
-import { addUser, getUserById, getUsersList, updateUserById } from './user.controller';
+import { addUser, deleteUserById, getUserById, getUsersList, updateUserById } from './user.controller';
 
 dotenv.config();
 
@@ -32,6 +32,12 @@ export const server = http.createServer(async (req: any, res: any) => {
       await updateUserById(req, res);
       return;
     }
+
+    if (req.url.match(/\/api\/users\/([a-z0-9-\w]+)/) && req.method === 'DELETE') {
+      await deleteUserById(req, res);
+      return;
+    }
+
     res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end('Route not found');
   },
