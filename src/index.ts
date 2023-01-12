@@ -1,6 +1,6 @@
 import http from 'http';
 import * as dotenv from 'dotenv';
-import { addUser, getUserById, getUsersList } from './user.controller';
+import { addUser, getUserById, getUsersList, updateUserById } from './user.controller';
 
 dotenv.config();
 
@@ -28,6 +28,10 @@ export const server = http.createServer(async (req: any, res: any) => {
       return;
     }
 
+    if (req.url.match(/\/api\/users\/([a-z0-9-\w]+)/) && req.method === 'PUT') {
+      await updateUserById(req, res);
+      return;
+    }
     res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end('Route not found');
   },
