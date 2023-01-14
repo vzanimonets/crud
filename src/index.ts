@@ -18,7 +18,7 @@ export const server = http.createServer(async (req: any, res: any) => {
       return;
     }
 
-    if (req.url.match(/\/api\/users\/([a-z0-9-\w]+)/) && req.method === 'GET') {
+    if (req.url.startsWith('/api/users/') && req.method === 'GET') {
       await getUserById(req, res);
       return;
     }
@@ -28,12 +28,12 @@ export const server = http.createServer(async (req: any, res: any) => {
       return;
     }
 
-    if (req.url.match(/\/api\/users\/([a-z0-9-\w]+)/) && req.method === 'PUT') {
+    if (req.url.startsWith('/api/users/') && req.method === 'PUT') {
       await updateUserById(req, res);
       return;
     }
 
-    if (req.url.match(/\/api\/users\/([a-z0-9-\w]+)/) && req.method === 'DELETE') {
+    if (req.url.startsWith('/api/users/')&& req.method === 'DELETE') {
       await deleteUserById(req, res);
       return;
     }
