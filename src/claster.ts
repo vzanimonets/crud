@@ -22,7 +22,7 @@ const ENDPOINTS = [
 
 const getAction = (req: any) => {
   return ENDPOINTS.find(item => {
-    return item.method === req.method && (item.url.startsWith(req.url) || req.url.startsWith(item.url));
+    return item.method === req.method && ((item.url.startsWith(req.url) || req.url.startsWith(item.url)));
   })?.fn;
 };
 
