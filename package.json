@@ -4,12 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:cluster": "npx ts-node  src/claster.ts",
     "start:dev": "npm run test && npx nodemon ",
     "test": "npx jest",
     "build": "webpack --mode=production",
     "start:prod": "npm run build && node dist/bundle.js",
-    "start:multi": ""
+    "start:multi": "npx ts-node  src/claster.ts"
   },
   "repository": {
     "type": "git",
