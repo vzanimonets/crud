@@ -11,7 +11,7 @@ if (!process.env.PORT) {
   console.log('Error to get port!');
 }
 
-const PORT: number = parseInt(process.env.PORT as string, 10);
+const PORT: number = parseInt(process.env.PORT as string, 10) || 4000;
 const ENDPOINTS = [
   { url: '/api/users', method: 'GET', fn: (req: any, res: any) => getUsersList(req, res) },
   { url: '/api/users/', method: 'GET', fn: (req: any, res: any) => getUserById(req, res) },
@@ -30,7 +30,7 @@ const pid = process.pid;
 let port: number = PORT;
 if (cluster.isMaster) {
   const count = cpus().length > ENDPOINTS.length ? ENDPOINTS.length : ENDPOINTS.length;
-  console.log(`Master pid:`, pid);
+  console.log(`Master pid: ${pid} on port ${PORT}`);
 
   for (let i = 0; i < count; i++) {
     ++port;

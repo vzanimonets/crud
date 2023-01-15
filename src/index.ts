@@ -9,7 +9,7 @@ if (!process.env.PORT) {
   console.log('Error to get port!');
 }
 
-const PORT: number = parseInt(process.env.PORT as string, 10);
+const PORT: number = parseInt(process.env.PORT as string, 10)||4000;
 
 export const server = http.createServer(async (req: any, res: any) => {
 
