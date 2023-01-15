@@ -31,7 +31,7 @@ const pid = process.pid;
 let port: number = PORT;
 if (cluster.isMaster) {
   const count = cpus().length > ENDPOINTS.length ? ENDPOINTS.length : ENDPOINTS.length;
-  process.stdout.write(`Master pid: ${pid} on port ${PORT}`);
+  process.stdout.write(`Master pid: ${pid} on port ${PORT}\n`);
 
   for (let i = 0; i < count; i++) {
     ++port;
@@ -63,6 +63,6 @@ if (cluster.isMaster) {
       }
     },
   );
-  server.listen(_port, () =>  process.stdout.write(`pid: ${_pid} on port from master is ${_port}`));
+  server.listen(_port, () =>  process.stdout.write(`pid: ${_pid} on port from master is ${_port}\n`));
 }
 
