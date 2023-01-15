@@ -1,13 +1,11 @@
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   target: 'node',
   entry: './src/index.ts',
-  externals: [nodeExternals()],
+
   module: {
     rules: [
       {
@@ -16,6 +14,9 @@ module.exports = {
         exclude: /node_modules/,
       },
     ],
+  },
+  externalsPresets:{
+    node: true,
   },
   resolve: {
     extensions: ['.ts'],
