@@ -8,21 +8,22 @@ dotenv.config();
 
 
 if (!process.env.PORT) {
-  console.log('Error to get port!');
+  process.stdout.write('Error to get port!');
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10) || 4000;
 const ENDPOINTS = [
+  { url: '/api/users', method: 'POST', fn: (req: any, res: any) => addUser(req, res) },
   { url: '/api/users', method: 'GET', fn: (req: any, res: any) => getUsersList(req, res) },
   { url: '/api/users/', method: 'GET', fn: (req: any, res: any) => getUserById(req, res) },
-  { url: '/api/users', method: 'POST', fn: (req: any, res: any) => addUser(req, res) },
   { url: '/api/users/', method: 'PUT', fn: (req: any, res: any) => updateUserById(req, res) },
   { url: '/api/users/', method: 'DELETE', fn: (req: any, res: any) => deleteUserById(req, res) },
 ];
 
 const getAction = (req: any) => {
+  const id = req.url.split('/')[3];
   return ENDPOINTS.find(item => {
-    return item.method === req.method && ((item.url.startsWith(req.url) || req.url.startsWith(item.url)));
+    return item.method === req.method && ((req.url === item.url) || req.url.startsWith(item.url) && id?.length);
   })?.fn;
 };
 
@@ -30,7 +31,7 @@ const pid = process.pid;
 let port: number = PORT;
 if (cluster.isMaster) {
   const count = cpus().length > ENDPOINTS.length ? ENDPOINTS.length : ENDPOINTS.length;
-  console.log(`Master pid: ${pid} on port ${PORT}`);
+  process.stdout.write(`Master pid: ${pid} on port ${PORT}`);
 
   for (let i = 0; i < count; i++) {
     ++port;
@@ -62,6 +63,6 @@ if (cluster.isMaster) {
       }
     },
   );
-  server.listen(_port, () => console.log(`pid: ${_pid} on port from master is ${_port}`));
+  server.listen(_port, () =>  process.stdout.write(`pid: ${_pid} on port from master is ${_port}`));
 }
 

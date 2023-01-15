@@ -6,7 +6,7 @@ dotenv.config();
 
 
 if (!process.env.PORT) {
-  console.log('Error to get port!');
+  process.stdout.write('Error to get port!\n');
 }
 
 const PORT: number = parseInt(process.env.PORT as string, 10) || 4000;
@@ -44,6 +44,6 @@ export const server = http.createServer(async (req: any, res: any) => {
 );
 
 server.listen(PORT, () => {
-  console.log(`server started on port: ${PORT}`);
+  process.stdout.write(`server started on port: ${PORT}\n`);
 });
 
