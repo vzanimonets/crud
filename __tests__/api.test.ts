@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { server } from '../src';
+import { server } from '../src/default';
 import { IUser } from '../src/user.interface';
 
 describe('GET /users', function() {

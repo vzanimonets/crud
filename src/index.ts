@@ -1,49 +1,7 @@
-import http from 'http';
-import * as dotenv from 'dotenv';
-import { addUser, deleteUserById, getUserById, getUsersList, updateUserById } from './user.controller';
+const lb = process.argv.slice(2);
 
-dotenv.config();
-
-
-if (!process.env.PORT) {
-  console.log('Error to get port!');
+if (lb.includes('--mode=lb')) {
+  import('./claster');
+} else {
+  import('./default');
 }
-
-const PORT: number = parseInt(process.env.PORT as string, 10)||4000;
-
-export const server = http.createServer(async (req: any, res: any) => {
-
-    if (req.url === '/api/users' && req.method === 'GET') {
-      await getUsersList(req, res);
-      return;
-    }
-
-    if (req.url.startsWith('/api/users/') && req.method === 'GET') {
-      await getUserById(req, res);
-      return;
-    }
-
-    if (req.url === '/api/users' && req.method === 'POST') {
-      await addUser(req, res);
-      return;
-    }
-
-    if (req.url.startsWith('/api/users/') && req.method === 'PUT') {
-      await updateUserById(req, res);
-      return;
-    }
-
-    if (req.url.startsWith('/api/users/')&& req.method === 'DELETE') {
-      await deleteUserById(req, res);
-      return;
-    }
-
-    res.writeHead(404, { 'Content-Type': 'application/json' });
-    res.end('Route not found');
-  },
-);
-
-server.listen(PORT, () => {
-  console.log(`server started on port: ${PORT}`);
-});
-

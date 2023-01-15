@@ -42,9 +42,6 @@ if (cluster.isMaster) {
       const _worker = cluster.fork({ port });
       _worker.send({ port: port, pid: _worker.process.pid });
     });
-    worker.on('online', () => {
-
-    });
   }
 } else {
   let _pid: number;
