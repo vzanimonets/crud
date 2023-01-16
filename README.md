@@ -4,7 +4,7 @@
 - [Description](#Description)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Using packages](#Using packages)
+- [Packages](#Packages)
 - [Credits](#credits)
 - [License](#license)
 
@@ -14,36 +14,34 @@ Implementation of simple CRUD API witch use in-memory database underneath.
 
 1. Implemented endpoint `api/users`:
     - **GET** `api/users` is used to get all persons
-        - Server should answer with `status code` **200** and all users records
+        - Server answer: with `status code` **200** and all users records
     - **GET** `api/users/{userId}`
-        - Server should answer with `status code` **200** and and record with `id === userId` if it exists
-        - Server should answer with `status code` **400** and corresponding message if `userId` is invalid (not `uuid`)
-        - Server should answer with `status code` **404** and corresponding message if record with `id === userId`
+        - Server answer: `status code` **200** and corresponding record with `id === userId` if it exists
+        - Server answer: `status code` **400** and corresponding message if `userId` is invalid (not `uuid`)
+        - Server answer: `status code` **404** and corresponding message if record with `id === userId`
           doesn't exist
     - **POST** `api/users` is used to create record about new user and store it in database
-        - Server should answer with `status code` **201** and newly created record
-        - Server should answer with `status code` **400** and corresponding message if request `body` does not
+        - Server answer: `status code` **201** and newly created record
+        - Server answer: `status code` **400** and corresponding message if request `body` does not
           contain **required** fields
     - **PUT** `api/users/{userId}` is used to update existing user
-        - Server should answer with` status code` **200** and updated record
-        - Server should answer with` status code` **400** and corresponding message if `userId` is invalid (not `uuid`)
-        - Server should answer with` status code` **404** and corresponding message if record with `id === userId`
+        - Server answer: ` status code` **200** and updated record
+        - Server answer: ` status code` **400** and corresponding message if `userId` is invalid (not `uuid`)
+        -Server answer:  ` status code` **404** and corresponding message if record with `id === userId`
           doesn't exist
     - **DELETE** `api/users/{userId}` is used to delete existing user from database
-        - Server should answer with `status code` **204** if the record is found and deleted
-        - Server should answer with `status code` **400** and corresponding message if `userId` is invalid (not `uuid`)
-        - Server should answer with `status code` **404** and corresponding message if record with `id === userId`
+        - Server answer: `status code` **204** if the record is found and deleted
+        - Server answer: `status code` **400** and corresponding message if `userId` is invalid (not `uuid`)
+        - Server answer: `status code` **404** and corresponding message if record with `id === userId`
           doesn't exist
 2. Users are stored as `objects` that have following properties:
     - `id` — unique identifier (`string`, `uuid`) generated on server side
     - `username` — user's name (`string`, **required**)
     - `age` — user's age (`number`, **required**)
     - `hobbies` — user's hobbies (`array` of `strings` or empty `array`, **required**)
-3. Requests to non-existing endpoints (e.g. `some-non/existing/resource`) should be handled (server should answer
-   with `status code` **404** and corresponding human-friendly message)
-4. Errors on the server side that occur during the processing of a request should be handled and processed correctly (
-   server should answer with `status code` **500** and corresponding human-friendly message)
-5. Value of `port` on which application is running should be stored in `.env` file
+3. Server's answer for requests to non-existing endpoints (e.g. `some-non/existing/resource`): `status code` **404** and corresponding human-friendly message)
+4. Server's answer for errors on the server side that occur during the processing of a request: `status code` **500** and corresponding human-friendly message)
+5. Value of `port` on which application is running stored in `.env` file
 
 ## Installation
 
@@ -59,7 +57,9 @@ Implementation of simple CRUD API witch use in-memory database underneath.
    npm install
    ```
 
-## Using packages
+## Packages
+   
+List of using packages:
 
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
@@ -86,7 +86,7 @@ Implementation of simple CRUD API witch use in-memory database underneath.
 Fist you should rename file `.env_example` to `.env`
 
 
-###Start application in development mode:
+### Start application in development mode:
 
    ```bash
    npm npm run start:dev
@@ -94,7 +94,7 @@ Fist you should rename file `.env_example` to `.env`
 
  This mode automatically run the tests before application is start.
 
-###Start application in production mode:
+### Start application in production mode:
 
    ```bash
    npm npm run start:prod
@@ -102,13 +102,15 @@ Fist you should rename file `.env_example` to `.env`
 
 This mode creat bundle file `dist/bundle.js`
 
-###Start application in  multi mode:
+### Start application in  multi mode:
 
    ```bash
    npm npm run start:multi
    ```
 
-###Start tests:
+Implementation of horizontal scaling for application that starts multiple instances of the application using the Node.js Cluster API.
+
+### Start tests:
 
    ```bash
    npm npm run test
