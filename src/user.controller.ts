@@ -53,8 +53,8 @@ const addUser = (req: any, res: any) => {
   req.on('end', async () => {
     const data = Buffer.concat(chunks);
     try {
-      const { userName, age, hobbies } = JSON.parse(data.toString());
-      if ((!userName || typeof userName !== 'string') ||
+      const { username, age, hobbies } = JSON.parse(data.toString());
+      if ((!username || typeof username !== 'string') ||
         (!age || typeof age !== 'number') ||
         (!isStringsArray(hobbies))) {
         res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -64,7 +64,7 @@ const addUser = (req: any, res: any) => {
 
       const user: IUser = {
         id: uuid(),
-        userName,
+        username,
         age,
         hobbies,
       };
@@ -101,8 +101,8 @@ const updateUserById = async (req: any, res: any) => {
         return;
       }
 
-      const { userName, age, hobbies } = JSON.parse(data.toString());
-      if ((userName && typeof userName !== 'string') ||
+      const { username, age, hobbies } = JSON.parse(data.toString());
+      if ((username && typeof username !== 'string') ||
         (age && typeof age !== 'number')
         || (hobbies && !isStringsArray(hobbies))) {
         res.writeHead(400, { 'Content-Type': 'application/json' });

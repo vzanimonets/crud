@@ -16,7 +16,7 @@ let createdUser: IUser;
 describe('POST /api/users', () => {
   it('should create new user and return return 201 with newly created record', async () => {
 
-    const newUserData = { userName: 'John Snow', age: 11, hobbies: [] };
+    const newUserData = { username: 'John Snow', age: 11, hobbies: [] };
     const response = await request(server)
       .post('/api/users')
       .send(newUserData)
@@ -26,18 +26,18 @@ describe('POST /api/users', () => {
 
     expect(createdUser).toEqual({
       id: expect.any(String),
-      userName: newUserData.userName,
+      username: newUserData.username,
       age: newUserData.age,
       hobbies: newUserData.hobbies,
     });
   });
 });
 
-describe('PUT /api/users', () => {
+describe('PUT /api/users/{userId}', () => {
   it('Update the created record response is expected containing an updated object with the same id', async () => {
     const newUserData = {
       id: 4532,
-      userName: 'NewUserName',
+      username: 'NewUserName',
       age: 23,
     };
     const response = await request(server)
