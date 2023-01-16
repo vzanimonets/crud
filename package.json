@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "npx nodemon ",
+    "start:dev": "npm run test && npx nodemon ",
     "test": "npx jest",
     "build": "webpack --mode=production",
     "start:prod": "npm run build && node dist/bundle.js",
